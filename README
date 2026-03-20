@@ -1,0 +1,114 @@
+# Secure 3-Tier Architecture on AWS using Terraform
+
+# Overview
+
+This project provisions a *secure, production-inspired 3-tier architecture* on AWS using Terraform.
+
+It demonstrates best practices in:
+
+* Infrastructure as Code (IaC)
+* Network isolation
+* Layered security design
+* Remote state management
+
+# Architecture
+
+The infrastructure is divided into three logical tiers:
+
+* *Web Tier (Public Subnet)*
+  Handles incoming HTTP requests from users
+
+* *App Tier (Private Subnet)*
+  Processes business logic and application workflows
+
+* *DB Tier (Private Subnet)*
+  Stores application data securely
+
+# Technologies Used
+
+* Terraform
+* AWS (VPC, EC2, Security Group, NAT Gateway, Internet Gateway, Route Tables)
+* S3 (Remote State Backend)
+* DynamoDB (State Locking)
+
+# Architecture Diagram
+
+Internet
+   │
+   ▼
+Internet Gateway
+   │
+Public Subnet (Web Tier EC2)
+   │
+Private Subnet (App Tier EC2)
+   │
+Private Subnet (DB Tier EC2)
+
+# Security Design
+
+This project follows *defense-in-depth principles*:
+
+* *Public access restricted to Web tier only*
+* *App tier accepts traffic only from Web tier*
+* *DB tier accepts traffic only from App tier*
+* *Private subnets have no direct internet access*
+* *NAT Gateway enables outbound-only internet for private resources*
+
+# Project Structure
+
+terraform-3tier-aws/
+│
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── provider.tf
+│
+└── terraform.tfvars
+
+# Terraform Backend
+
+Remote state is configured using:
+
+* *S3 Bucket* → Stores Terraform state
+* *DynamoDB Table* → Prevents concurrent modifications (state locking)
+
+# Getting Started
+
+# 1. Clone the Repository
+
+bash
+git clone git@github.com:damilola-ajayi04/x3-tier.git
+cd x3-tier
+
+
+# 2. Initialize Terraform
+
+bash
+terraform init
+
+
+# 3. Preview Infrastructure
+
+bash
+terraform plan
+
+
+# 4. Deploy
+
+bash
+terraform apply
+
+# Important Notes
+
+* This project uses a *single AZ (for demo purposes)*
+
+# Improvements (Next Steps if required)
+
+* Multi-AZ deployment for high availability
+
+# Key Learnings
+
+* How to design a secure 3-tier architecture
+* Terraform resource dependencies and structure
+* AWS networking fundamentals (VPC, subnets, routing)
+* Secure infrastructure design principles
