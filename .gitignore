@@ -2,7 +2,7 @@
 
 .terraform/
 *.tfstate
-.tfstate.
+.tfstate.backup
 crash.log
 
 # Sensitive Variables

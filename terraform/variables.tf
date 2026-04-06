@@ -59,27 +59,14 @@ variable "instance_type" {
 }
 
 variable "allowed_ssh_cidr" {
-  description = "CIDR block allowed for SSH access (restrict to your IP)"
+  description = "CIDR block allowed for SSH access"
   type        = string
   default     = "0.0.0.0/0"
-}
-
-variable "state_bucket_name" {
-  description = "S3 bucket for Terraform state"
-  type        = string
-  default     = "x3-tier-terraform-state"
-}
-
-variable "dynamodb_table_name" {
-  description = "DynamoDB table for state locking"
-  type        = string
-  default     = "terraform-state-lock"
 }
 
 variable "common_tags" {
   description = "Common tags for all resources"
   type        = map(string)
-
   default = {
     Project     = "x3-tier"
     Environment = "dev"
