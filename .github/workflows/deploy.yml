@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -23,11 +22,11 @@ jobs:
 
     - name: Login to ECR
       run: |
-        aws ecr get-login-password --region $AWS_REGION | \
+        aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | \
         docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
 
     - name: Build Docker image
-      run: docker build -t flask-app .
+      run: docker build -t flask-app ./app
 
     - name: Tag image
       run: |
